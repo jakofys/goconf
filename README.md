@@ -10,7 +10,7 @@ Base on driver configuration completion problem (not really one), this library p
 
 - `go 1.13.+ or more recent`
 
-## Intelligent features
+## Usage
 
 ### `Sprintf`
 
@@ -58,6 +58,10 @@ GetEnv("FUNC_NAME") // output => ImportFromOS
 GetEnv("FUNC_DIR") // output => here
 GetEnv("AS_FUNC_NAME") // empty output
 ```
+
+## Test
+
+Just run `go test` in current workdir, than go execute each testing function in corresponding test file that respect pattern name `<name>_test.go`
 
 ## Warning
 
