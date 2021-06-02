@@ -20,7 +20,7 @@ func (e *WrongEnvFileFormatError) Error() string {
 
 func ImportEnvFile(filename string) error {
 	dir, _ := os.Getwd()
-	if file, err := ioutil.ReadFile(dir + filename); err != nil {
+	if file, err := ioutil.ReadFile(dir + "/" + filename); err != nil {
 		return err
 	} else {
 		regComment := regexp.MustCompile(``)
