@@ -28,7 +28,7 @@ func ImportEnvFile(filename string) error {
 		for _, line := range strings.Split(string(file), "\n") {
 			if regVar.MatchString(line) {
 				envVar := strings.Split(line, "=")
-				env[strings.ToLower(envVar[0])] = strings.ToLower(envVar[1])
+				env[strings.ToLower(envVar[0])] = envVar[1]
 			} else if !regComment.MatchString(line) {
 				return &WrongEnvFileFormatError{
 					filename: filename,
@@ -44,7 +44,7 @@ func ImportFromOS(pattern string) {
 	for _, line := range os.Environ() {
 		envVar := strings.Split(line, "=")
 		if reg.MatchString(envVar[0]) {
-			env[strings.ToLower(envVar[0])] = strings.ToLower(envVar[1])
+			env[strings.ToLower(envVar[0])] = envVar[1]
 		}
 	}
 }
