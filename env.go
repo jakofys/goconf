@@ -39,10 +39,13 @@ func ImportEnvFile(filename string) error {
 	return nil
 }
 
-func ImportFromOS() {
+func ImportFromOS(pattern string) {
+	reg := regexp.MustCompile(strings.ReplaceAll(pattern, "*", ".*"))
 	for _, line := range os.Environ() {
 		envVar := strings.Split(line, "=")
-		env[strings.ToLower(envVar[0])] = strings.ToLower(envVar[1])
+		if reg.MatchString(envVar[0]) {
+			env[strings.ToLower(envVar[0])] = strings.ToLower(envVar[1])
+		}
 	}
 }
 
@@ -50,7 +53,7 @@ func Sprintf(text string) string {
 	reg := regexp.MustCompile(`%\w+%`)
 	for _, key := range reg.FindAllString(text, -1) {
 		if value, ok := env[key[1:len(key)-1]]; ok {
-			strings.ReplaceAll(text, key, value)
+			text = strings.ReplaceAll(text, key, value)
 		}
 	}
 	return text
