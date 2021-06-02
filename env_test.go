@@ -12,3 +12,11 @@ func TestImportEnvFile(t *testing.T) {
 		t.Error(err)
 	}
 }
+
+func TestImportFromOS(t *testing.T) {
+	pattern := "HOM*"
+	goenv.ImportFromOS(pattern)
+	if goenv.GetEnv("HOME") == "" {
+		t.Error("After import env var of the linux os, HOME env var not found")
+	}
+}

@@ -60,7 +60,7 @@ func Sprintf(text string) string {
 }
 
 func GetEnv(key string) string {
-	if envVar, ok := env[key]; ok {
+	if envVar, ok := env[strings.ToLower(key)]; ok {
 		return envVar
 	} else {
 		return ""
